@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KolamWeaver: A Technical White Paper</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Kolam/Rangoli Theming --- */
+        :root {
+            --saffron: #FF9933;
+            --green: #138808;
+            --maroon: #800000;
+            --background-light: #FFFBF5; /* A very light, warm cream */
+            --text-dark: #3D3D3D;
+            --border-color: #E0E0E0;
+        }
+
+        /* --- General Body Styling --- */
+        body {
+            font-family: 'Lora', serif;
+            line-height: 1.8;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23E0E0E0' fill-opacity='0.2'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        main {
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 20px 40px;
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-radius: 8px;
+        }
+        
+        /* --- Typography & Headers --- */
+        #logo {
+            background-image: url(./assets/image.png);
+            height: 3rem;
+            width: 3rem;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: var(--maroon);
+        }
+
+        h1 {
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 0.2em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .tagline {
+            text-align: center;
+            font-size: 1.2em;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 300;
+            margin-top: 0;
+            margin-bottom: 3em;
+            color: var(--saffron);
+        }
+
+        h2 {
+            font-size: 2.2em;
+            border-bottom: 2px solid var(--saffron);
+            padding-bottom: 10px;
+            margin-top: 2em;
+        }
+        
+        h3 {
+            font-size: 1.5em;
+            color: var(--green);
+        }
+
+        a {
+            color: var(--saffron);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- Decorative Elements & Sections --- */
+        hr.divider {
+            border: 0;
+            height: 2px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), var(--saffron), rgba(0, 0, 0, 0));
+            margin: 3em 0;
+        }
+        
+        .placeholder-image {
+            width: 100%;
+            height: 400px;
+            background-color: #f9f9f9;
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            color: #aaa;
+            margin: 2em 0;
+            font-size: 1.2em;
+            text-align: center;
+        }
+
+        #eco {
+            background-image: url(./assets/eco.png);
+        }
+
+        #sys {
+            background-image: url(./assets/sys.png);
+        }
+
+        .image {
+            width: 100%;
+            height: 100%;
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        
+        /* --- To-Do List Styling --- */
+        .todo-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        #remark, .todo-list li {
+            padding: 12px 0 12px 40px;
+            position: relative;
+            border-bottom: 1px solid var(--border-color);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+        }
+
+        #remark {
+            margin: auto;
+            text-align: center;
+        }
+
+        .todo-list li:last-child {
+            border-bottom: none;
+        }
+        .todo-list li:before {
+            content: '☐'; /* Unchecked box */
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            color: var(--saffron);
+        }
+
+        /* --- GitHub Button --- */
+        .github-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 40px auto;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #4a4a4a 0%, #24292e 100%);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2em;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .github-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            text-decoration: none;
+        }
+        .github-button svg {
+            width: 28px;
+            height: 28px;
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        <header>
+            <h1><div class="image" id="logo"></div><div>KolamWeaver</div></h1>
+            <p class="tagline">A Technical White Paper on Weaving Tradition into the Digital Age</p>
+        </header>
+
+        <section id="abstract">
+            <h2>Abstract</h2>
+            <p>
+                Kolam (also known as Muggu or Rangoli) is a traditional Indian art form rich with mathematical ingenuity, including principles of symmetry, recursion, and graph theory. This document outlines **KolamWeaver**, an intelligent platform designed to bridge this ancient knowledge with modern technology. The system uses a computer vision and algorithmic approach to analyze images of Kolams, decode their fundamental design principles, and recreate them digitally. Furthermore, it empowers users to learn, create, and experience these designs in an interactive web environment and through immersive Augmented Reality (AR), making this cultural heritage accessible, understandable, and innovative for a new generation.
+            </p>
+        </section>
+
+        <hr class="divider">
+
+        <section id="problem-statement">
+            <h2>Problem Statement</h2>
+            <p>
+                This project addresses the challenge from AICTE's Indian Knowledge Systems (IKS) division: <em>"Develop computer programs to identify the design principles behind the Kolam designs and recreate the kolams."</em> The core task is to move beyond simple image replication and develop a system that can computationally understand and formalize the artistic and mathematical rules embedded in these traditional patterns.
+            </p>
+        </section>
+
+        <hr class="divider">
+
+        <section id="solution">
+            <h2>Proposed Solution: The KolamWeaver Ecosystem</h2>
+            <p>
+                KolamWeaver is a comprehensive web platform that provides a complete cycle of analysis, creation, and experience. It functions as an intelligent ecosystem that decodes tradition and makes it a canvas for future creativity.
+            </p>
+            <div class="placeholder-image"><div class="image" id="eco"></div></div>
+            <h3>Key Features:</h3>
+            <ul>
+                <li><strong>Analyze & Decode:</strong> Users can upload an image of any Kolam, and our system's analysis engine will extract its core principles—dot grid, symmetry, path logic—presenting its mathematical 'DNA'.</li>
+                <li><strong>Create & Learn:</strong> An interactive web canvas allows users to design their own Kolams from scratch, assisted by innovative tools like a "Symmetry Brush" that make complex geometric concepts intuitive.</li>
+                <li><strong>Experience in AR:</strong> Users can project their digital Kolam creations into their real-world environment using our web-based Augmented Reality feature, visualizing the art in its intended context.</li>
+            </ul>
+        </section>
+        
+        <hr class="divider">
+
+        <section id="technical-architecture">
+            <h2>Technical Architecture</h2>
+            <p>Our solution is built on a modern, robust, and open-source tech stack, architected for efficiency and scalability. The system is divided into a backend analysis engine and a frontend user experience.</p>
+            <div class="placeholder-image"><div class="image" id="sys"></div>System Architecture Diagram
+</div>
+            
+            <h3>Technology Stack:</h3>
+            <ul>
+                <li><strong>Backend:</strong> Python, Flask, OpenCV, scikit-image, NetworkX.</li>
+                <li><strong>Frontend:</strong> HTML5, CSS3, JavaScript (ES6+), Three.js.</li>
+                <li><strong>Augmented Reality:</strong> WebXR Device API.</li>
+            </ul>
+
+            <h3>Our Rationale: Algorithmic Precision over AI Prediction</h3>
+            <p>
+                We consciously chose a direct algorithmic method over a traditional machine learning model. The goal is to extract <strong>explicit, understandable rules</strong>, not just classify a pattern. An algorithmic approach is data-efficient, working on a single image without needing a massive training dataset, and it provides the precise, explainable output required to truly understand and recreate the art form's logic.
+            </p>
+        </section>
+
+        <hr class="divider">
+
+        <section id="impact-benefits">
+            <h2>Impact and Benefits</h2>
+            <p>Beyond the technical implementation, KolamWeaver is designed to create a lasting positive impact.</p>
+            <ul>
+                <li><strong>Cultural Preservation:</strong> We are creating a living, digital archive of not just the Kolam images, but their underlying mathematical soul.</li>
+                <li><strong>STEAM Education:</strong> Our platform makes complex geometry and computational thinking feel like a creative game, inspiring a new generation of learners.</li>
+                <li><strong>Global Accessibility:</strong> We offer a modern, immersive way for a global audience to experience and interact with a profound piece of Indian heritage.</li>
+                <li><strong>Creative Empowerment:</strong> The platform serves as a novel tool for artists and designers to innovate on traditional patterns for modern applications.</li>
+            </ul>
+        </section>
+        
+        <hr class="divider">
+
+        <section id="roadmap-todos">
+            <h2>Project Roadmap & Next Steps</h2>
+            <p>Following the successful submission of this white paper, the development of the KolamWeaver prototype will commence. The work is divided into a clear, phased to-do list.</p>
+            <ul class="todo-list">
+                <li>Setup Python backend with Flask and define API endpoints.</li>
+                <li>Implement the core OpenCV image preprocessing pipeline (grayscale, binarization, noise reduction).</li>
+                <li>Develop and fine-tune the dot detection algorithm using Hough Circles.</li>
+                <li>Implement line skeletonization and build the graph data structure using NetworkX.</li>
+                <li>Build the first generative algorithm for simple, symmetrical patterns from a rule set.</li>
+                <li>Create the basic HTML/CSS frontend structure and user interface.</li>
+                <li>Develop the interactive "Creator" tool using the HTML Canvas API and JavaScript.</li>
+                <li>Connect the frontend to the backend API for a full analysis-to-display loop.</li>
+                <li>Integrate Three.js and the basic WebXR scene for the Augmented Reality feature.</li>
+                <li>Deploy the initial working prototype to a cloud service for live demonstration.</li>
+            </ul>
+        </section>
+        
+        <footer>
+            <a href="#" class="github-button">
+                <!-- Replace # with your actual GitHub repository URL -->
+                <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="white"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                View Prototype Source Code
+            </a>
+        </footer>
+
+    </main>
+<div id="remark">Team Execal SIH@2025</div>
+</body>
+</html>
+
